@@ -1,5 +1,5 @@
-var canvas = document.querySelector("canvas");
-var c = canvas.getContext("2d");
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d");
 
 canvas.width = window.innerWidth*29/30;
 canvas.height = window.innerHeight*29/30;
@@ -80,11 +80,11 @@ class Finish {
 
 
 
-const platforms = [new Platform({x: 500, y: 300}),
-    new Platform({x: 700, y: 400}),
-    new Platform({x: 900, y: 300}),
-    new Platform({x: 1100, y: 200}),
-    new Platform({x: 1300, y: 100})]
+const platforms = [new Platform({x: 500, y: 250}),
+    new Platform({x: 700, y: 350}),
+    new Platform({x: 900, y: 250}),
+    new Platform({x: 1100, y: 150}),
+    new Platform({x: 1300, y: 50})]
 const player = new Player();
 const finish = new Finish();
 
@@ -112,10 +112,8 @@ function animate() {
             ||player.position.y+player.height>=platform.position.y+platform.open)){
                 player.velocity.y = 0;
                 speed = 0;
-                console.log("kaybettin");
                 document.querySelector(".container").style.display = "flex";
                 document.querySelector(".lose").style.display = "flex";
-                document.querySelector(".win").remove();
             }
     })
 
@@ -131,14 +129,35 @@ function animate() {
 animate();
 
 
-addEventListener("keydown",({keyCode}) => {
+window.addEventListener("keydown",({keyCode}) => {
     console.log(keyCode);
     if(keyCode == 87) {
-        console.log("üst");
+        console.log("up");
         player.velocity.y = -10;
     }
 })
 
+
 function reset() {
-    window.location.reload();
+    document.querySelector(".container").style.display = "none";
+    document.querySelector(".win").style.display = "none";
+    document.querySelector(".lose").style.display = "none";
+    player.position.x = 100;
+    player.position.y = 100;
+    speed = 5;
+    finish.position.x = 1700;
+    console.log(platforms[(0)].open)
+
+
+    platforms[0].position.x = 500;
+    platforms[1].position.x = 700;
+    platforms[2].position.x = 900;
+    platforms[3].position.x = 1100;
+    platforms[4].position.x = 1300;
+
 }
+
+
+
+document.querySelector("#btn2").addEventListener("click", reset);
+document.querySelector("#btn1").addEventListener("click", reset);
