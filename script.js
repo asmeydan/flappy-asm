@@ -5,7 +5,6 @@ canvas.width = window.innerWidth*29/30;
 canvas.height = window.innerHeight*29/30;
 
 
-const gravity = 0.5;
 class Player {
     constructor() {
         this.position = {
@@ -27,8 +26,8 @@ class Player {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        if(player.position.y+player.height+this.velocity.y<=canvas.height) {
-            this.velocity.y += gravity;
+        if(this.position.y+this.height+this.velocity.y<=canvas.height) {
+            this.velocity.y += 0.5;
         }
         else {
             this.velocity.y = 0;
